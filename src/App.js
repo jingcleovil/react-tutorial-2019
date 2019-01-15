@@ -3,23 +3,41 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    name: '',
+    caption: ''
+  }
+
+  changeText = (e) => {
+    this.setState({
+      name: e.target.value,
+    })
+  }
+
+  submit = (e) => {
+    e.preventDefault();
+    this.setState({
+      caption: `Hello ${this.state.name}`,
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <form onSubmit={this.submit}>
+          <label>Name</label>
+          <input
+            onChange={this.changeText}
+            type="text"
+            value={this.state.name}
+          />
+          <br />
+          <button>Submit</button>
+        </form>
+
+        <hr/>
+        <h1>{ this.state.caption }</h1>
       </div>
     );
   }
